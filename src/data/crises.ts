@@ -31,7 +31,8 @@ export const crisesList: Crisis[] = [
       temperature: '72°F',
       statusRating: 'OPTIMAL',
       incidentCount: 0
-    }
+    },
+    track: 'Core System Readiness'
   },
   {
     id: 'gate_surge',
@@ -63,7 +64,41 @@ export const crisesList: Crisis[] = [
       temperature: '72°F',
       statusRating: 'CRITICAL',
       incidentCount: 1
-    }
+    },
+    track: 'Track 1: Dynamic Crowd Management'
+  },
+  {
+    id: 'sensory_navigation',
+    title: 'SECTION 102 ACCESSIBILITY REROUTING',
+    severity: 'High',
+    description: 'Acoustic levels in Section 102 (South Stand) trigger high-sensory alarms, initiating smart indoor navigation detours.',
+    targetSector: 'South',
+    dangerIndex: 65,
+    confidenceScore: 96,
+    sensorLogs: [
+      'ALERT: Acoustic decibel threshold exceeded (104 dB) near South Stand Section 102 boundary.',
+      'SENSOR: Real-time indoor location nodes identify 42 neurodivergent and disabled spectators in Section 102.',
+      'WAYFINDING: Digital signage network activated for automated accessibility routing guidance.',
+      'INFRA: Accessibility elevator S-Elevator-2 reporting nominal ready state.'
+    ],
+    aiReasoning: 'Acoustic spike in Section 102 triggers dynamic accessibility and smart indoor navigation protocols in compliance with FIFA Accessibility Standard Section 9. High sound levels present sensory risk for neurodivergent and vulnerable fans. Rerouting pathways must be set to guide spectators safely through designated quiet-corridors.',
+    directives: [
+      'REROUTE path: Activate dynamic green-lit wayfinding sign arrays in South Concourse, guiding spectators to the Low-Acoustic Corridor S1B.',
+      'DEPLOY assistance: Deploy Accessibility Marshals with sound-dampening ear defenders and sensory assistance packs directly to Section 102.',
+      'ACTIVATE quiet-zone: Trigger HVAC and soft-lighting presets in adjacent Level 1 Sensory Sanctuary Room to accommodate transition guests.'
+    ],
+    translations: {
+      en: 'Accessibility alert for Section 102. For a low-sensory exit route or noise-dampening gear, please follow the green light paths toward Corridor S1B.',
+      es: 'Alerta de accesibilidad en la Sección 102. Para una ruta con bajo nivel de ruido o equipos de atenuación sonora, siga las luces verdes hacia el Pasillo S1B.',
+      fr: 'Alerte d\'accessibilité pour la Section 102. Pour un itinéraire à faible niveau de bruit, veuillez suivre le balisage vert vers le Couloir S1B.'
+    },
+    metricOverrides: {
+      attendance: '81,950',
+      temperature: '72°F',
+      statusRating: 'ACCESSIBILITY ACTIVE',
+      incidentCount: 1
+    },
+    track: 'Track 2: Smart Indoor Navigation & Accessibility'
   },
   {
     id: 'transit_blockade',
@@ -79,11 +114,11 @@ export const crisesList: Crisis[] = [
       'CCTV: Ingress congestion at West Plaza stalling emergency vehicle access lanes.',
       'COORD: New Jersey Transit authorities report a 45-minute minimum electrical repair window.'
     ],
-    aiReasoning: 'Transit bottleneck at West Terminal. Heavy queue backup is overflowing into emergency vehicle corridors and West Stand plazas, violating FIFA safety evacuation zone integrity. Crowd mood is stable but density is high, impeding potential ambulance egress route.',
+    aiReasoning: 'Transit bottleneck at West Terminal. Heavy queue backup is overflowing into emergency vehicle corridors and West Stand plazas, violating FIFA safety evacuation zone integrity. Transit failure demands immediate activation of carbon-offset bus bridges to maintain sustainability goals.',
     directives: [
-      'BUS bridging: Activate the pre-arranged emergency transit bus line (Route Red, 25 high-capacity buses) from Lot G to Secaucus Junction.',
-      'SECURE corridor: Enforce emergency vehicle cordon C-3 in coordination with local police; redirect non-essential traffic away from the West Arena.',
-      'FAN notification: Deploy bilingual volunteer marshals with high-volume megaphones to West Plaza to guide spectators to alternate transit nodes.'
+      'BUS bridging: Activate the fleet of 25 zero-emission electric shuttle buses from Lot G to Secaucus Junction to maintain transit throughput.',
+      'GREEN dispatch: Sync with the regional smart-grid dispatch to leverage off-grid solar-battery storage at the MetLife west terminal charging depot.',
+      'COMMUNICATE delay: Distribute dynamic digital transit alerts on the FIFA 2026 app, directing travelers to low-carbon shuttle lanes.'
     ],
     translations: {
       en: 'Due to a transit disruption on the West Metrolink, please use the free shuttle buses operating from Lot G to Secaucus Junction. Follow staff directions.',
@@ -95,38 +130,7 @@ export const crisesList: Crisis[] = [
       temperature: '71°F',
       statusRating: 'DEGRADED',
       incidentCount: 1
-    }
-  },
-  {
-    id: 'severe_lightning',
-    title: 'SEVERE WEATHER & LIGHTNING',
-    severity: 'Extreme',
-    description: 'Category 3 electrical storm detected within 2.5-mile perimeter. Immediate evacuation of open bowl under FIFA severe weather policy.',
-    targetSector: 'North',
-    dangerIndex: 95,
-    confidenceScore: 98,
-    sensorLogs: [
-      'METEOROLOGY: Category 3 Lightning Strike detected within 2.5 miles of MetLife Stadium.',
-      'SENSOR: Extreme wind shear warning (54 knots) at upper rim anemometer nodes.',
-      'INFRA: Roof canopy static-charge sensors trigger pre-ionization lightning risk warning.',
-      'COORD: NOAA and Local Emergency Operations Command issue immediate shelter-in-place order.'
-    ],
-    aiReasoning: 'Immediate life safety threat from electrical lightning strikes. Direct strike risk on exposed steel canopy is high under FIFA Severe Weather guidelines. Evacuation of open-air upper deck bowls and lower-bowl perimeter zones is critical. Field play must halt instantly.',
-    directives: [
-      'HALT match: Instruct FIFA match officials to halt play immediately and guide players to subterranean secure concrete team bunkers.',
-      'EVACUATE bowl: Initiate immediate evacuation of all open seating bowl tiers to fully enclosed interior concrete concourses.',
-      'BROADCAST emergency: Switch all digital stadium displays and LED ribbon boards to weather emergency instructions and guide shelter-in-place protocols.'
-    ],
-    translations: {
-      en: 'An extreme weather warning has been issued. For your safety, evacuate your seats immediately and proceed to the covered, secure concourses.',
-      es: 'Se ha emitido una alerta por clima extremo. Por su seguridad, evacúen sus asientos de inmediato y busquen refugio en los vestíbulos cubiertos.',
-      fr: 'Une alerte météo extrême a été émise. Pour votre sécurité, veuillez évacuer vos sièges immédiatement et vous abriter dans les halls couverts.'
     },
-    metricOverrides: {
-      attendance: '82,410',
-      temperature: '65°F',
-      statusRating: 'EXTREME EVAC',
-      incidentCount: 2
-    }
+    track: 'Track 3: Tournament Sustainability & Transport'
   }
 ];

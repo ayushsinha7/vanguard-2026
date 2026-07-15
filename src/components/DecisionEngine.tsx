@@ -145,9 +145,17 @@ export default function DecisionEngine({
                     </div>
 
                     {/* Confidence Score */}
-                    <div className="flex justify-between items-center">
+                    <div className="flex justify-between items-center border-b border-zinc-900 pb-1.5">
                       <span className="text-[9px] text-zinc-500 uppercase tracking-widest font-mono">Confidence</span>
                       <span className="text-xs font-mono font-semibold text-zinc-300">{activeCrisis.confidenceScore}.0%</span>
+                    </div>
+
+                    {/* Active Track Section */}
+                    <div className="pt-1">
+                      <span className="text-[8px] text-zinc-500 uppercase tracking-widest font-mono block mb-1">EVALUATION TRACK</span>
+                      <span className="text-[9px] px-2 py-1 bg-zinc-900 border border-zinc-800 rounded font-mono font-bold text-emerald-400 block tracking-wide uppercase truncate">
+                        {activeCrisis.track || 'Core System Readiness'}
+                      </span>
                     </div>
                   </div>
                 </div>

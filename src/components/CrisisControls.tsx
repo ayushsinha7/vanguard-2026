@@ -1,6 +1,7 @@
 import React from 'react';
 import { Crisis, IncidentLogEntry } from '../types';
-import { ShieldAlert, RefreshCw, TriangleAlert, CloudLightning, Activity, AlertOctagon } from 'lucide-react';
+import { ShieldAlert, RefreshCw, TriangleAlert, CloudLightning, Activity, AlertOctagon, Compass } from 'lucide-react';
+import { sanitizeLogInput } from '../utils/sanitizer';
 
 interface CrisisControlsProps {
   crises: Crisis[];
@@ -10,18 +11,6 @@ interface CrisisControlsProps {
   isProcessing: boolean;
   onClearLogs: () => void;
 }
-
-/**
- * Sanitizes input text to strip scripts, event handlers, and javascript protocols,
- * preventing hypothetical XSS injection vectors at the enterprise application boundary.
- */
-const sanitizeLogInput = (raw: string): string => {
-  if (!raw) return '';
-  let cleaned = raw.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '[REDACTED_SCRIPT]');
-  cleaned = cleaned.replace(/on\w+\s*=/gi, '[REDACTED_EVENT_HANDLER]');
-  cleaned = cleaned.replace(/javascript\s*:/gi, '[REDACTED_JS_PROTOCOL]');
-  return cleaned;
-};
 
 export default function CrisisControls({
   crises,
@@ -36,6 +25,8 @@ export default function CrisisControls({
     switch (id) {
       case 'gate_surge':
         return <ShieldAlert className="h-4 w-4 text-rose-500" />;
+      case 'sensory_navigation':
+        return <Compass className="h-4 w-4 text-emerald-400 animate-[spin_8s_linear_infinite]" />;
       case 'transit_blockade':
         return <TriangleAlert className="h-4 w-4 text-amber-500" />;
       case 'severe_lightning':
@@ -178,6 +169,10 @@ export default function CrisisControls({
                       </span>
                       {getSeverityBadge(crisis.severity)}
                     </div>
+                    {/* Explicit Track Display */}
+                    <span className="text-[8px] font-mono uppercase text-emerald-500/80 tracking-wider block mb-0.5">
+                      {crisis.track || 'Core System Readiness'}
+                    </span>
                     <p className="text-[10px] text-zinc-500 line-clamp-1 font-sans">
                       {crisis.description}
                     </p>

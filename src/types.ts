@@ -27,6 +27,7 @@ export interface Crisis {
   directives: string[];
   translations: MultilingualBroadcast;
   metricOverrides?: MetricOverrides;
+  track?: string;
 }
 
 export interface IncidentLogEntry {
