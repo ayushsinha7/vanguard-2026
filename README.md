@@ -1,64 +1,79 @@
-# Vanguard 2026: FIFA World Cup Smart Stadium Safety System
+# 🏟️ VANGUARD 2026 // FIFA World Cup Smart Stadium Mission Control
 
-An enterprise-grade cognitive operations dashboard engineered for **MetLife Stadium (FIFA World Cup 2026 Tournament Site)**. Vanguard 2026 synthesizes multi-modal IoT sensor telemetry, turnstile entry velocities, dynamic crowd acoustics, and transport network feeds in real-time to safeguard over 82,000 spectators.
+Vanguard 2026 is an enterprise-grade, real-time GenAI-enabled Incident Command and Dynamic Crowd Control dashboard. Specifically engineered to meet the massive operational demands of the FIFA World Cup 2026, it transforms raw, chaotic on-ground telemetry into real-time decision support, automated volunteer dispatch directives, and instant multilingual spectator broadcasts.
 
----
-
-## 🌟 Chosen Vertical & Operational Persona
-- **Role:** Lead Vanguard 2026 Smart Stadium AI Safety Director
-- **Operational Site:** MetLife Stadium, East Rutherford, NJ (FIFA World Cup 2026)
-- **Authority Level:** Full operational alignment with **FIFA Stadium Safety & Security Regulations**.
+**Live Link:** https://fifa-world-cup-2026-smart-stadium-mission-control-680335411376.asia-southeast1.run.app
 
 ---
 
-## 🚀 Three Core Tracks (Problem Statement Alignment)
-
-The platform is designed around three key tracks outlined in the FIFA World Cup tournament expectations:
-
-### 1. Track 1: Dynamic Crowd Management
-- **Scenario Simulated:** *Gate 4 Ingress Surge & Turnstile Access Failure*
-- **Acoustic / Telemetry Inputs:** Real-time sensor feeds monitoring turnstile bank E1-E8 offline status, localized crowd density spikes exceeding critical levels (4.8 persons/m²), and high-frequency structural load indicators.
-- **Dynamic Mitigation:** Automatic load balancing, triggering real-time digital wayfinding sign arrays, and routing arriving spectator waves to the nearest available gates (Gate 5) before a crowd-crush condition develops.
-
-### 2. Track 2: Smart Indoor Navigation & Accessibility
-- **Scenario Simulated:** *Section 102 Sound Pressure & Accessibility Detour*
-- **Acoustic / Telemetry Inputs:** Ambient decibel monitoring detecting dangerous acoustic spikes (104+ dB), combined with indoor location coordinates identifying sensory-vulnerable, neurodivergent, and disabled spectators.
-- **Dynamic Mitigation:** Programmatic routing of disabled spectators through low-acoustic quiet corridors (S1B), coordination with dedicated Accessibility Marshals, and activation of sensory rooms with soothing climate and lighting profiles.
-
-### 3. Track 3: Tournament Sustainability & Transport
-- **Scenario Simulated:** *West Metrolink Transit Blockade & Zero-Emission Shuttle Bridge*
-- **Acoustic / Telemetry Inputs:** Power rail telemetry detecting stalled commuter trains outside the West Transit Hub and immediate backlog of 18,500+ queuing passengers.
-- **Dynamic Mitigation:** Smart-grid green shuttle fleet dispatch (25+ zero-emission electric buses operating from Lot G) combined with dynamic transit delay push alerts on the spectator mobile app.
+## 🎯 Challenge Verticals & Alignment
+* **Chosen Vertical:** Smart Stadiums & Tournament Operations
+* **Persona:** Automated Chief Safety Officer & Venue Logistics Coordinator
+* **Track Intersections:** 
+  * *Track 1: Dynamic Crowd Management* (e.g., Turnstile surges)
+  * *Track 2: Smart Indoor Navigation & Accessibility* (e.g., Dynamic sensory rerouting)
+  * *Track 3: Tournament Sustainability & Transport* (e.g., Transit blockade mass re-routing)
 
 ---
 
-## 📊 Technical Architecture & System Features
-
-### 1. Robust Programmatic Testing Suite (`VanguardAutomatedTestSuite`)
-To ensure total runtime stability, the system features a self-executing unit test suite running on load and executable programmatically:
-- **`testIncidentStateChange()`**: Asserts that triggering a crisis modifies danger levels, severity classes, and sector coordinates correctly.
-- **`testMultilingualLocalization()`**: Guarantees that acoustic warnings and alerts exist in English (Primary), Spanish (MX), and French (FR) with complete coverage.
-- **`testInputSanitization()`**: Confirms that XSS injection attempts (malicious scripts, event handlers, protocols) are stripped before rendering.
-- **Test Runner Integration:** Run tests directly using the built-in NPM script:
-  ```bash
-  npm test
-  ```
-
-### 2. Security & Input Sanitization
-- **XSS Neutralization:** Utilizes an industrial-grade escaping utility (`/src/utils/sanitizer.ts`) to intercept logs and user prompts, sanitizing active HTML tags, `onerror` event handlers, and `javascript:` protocols.
-- **Zero Exposed Keys:** Strict adherence to modern server-side secret management.
-
-### 3. Rendering Efficiency & Performance
-- **Re-render Isolation:** The high-frequency UTC clock ticker is isolated in its own micro-component `<ClockTicker />`, preventing whole-page re-renders every 1000ms.
-- **Spatial Telemetry Memoization:** The `<StadiumSVG />` component uses React `useCallback` for event handlers and static map configurations cached outside the component render tree.
-
-### 4. Accessibility & Inclusive Design (WCAG 2.1 AA)
-- **High-Contrast Design:** Slate dark mode canvas with custom emerald and rose indicators, exceeding a 4.5:1 color contrast ratio.
-- **Screen Reader Support:** Full semantic HTML elements coupled with `role="region"`, `role="log"`, `role="status"`, `aria-live="polite"`, and specific `aria-label` tags on all interactive widgets.
+## 🧠 Approach and Logic
+* **Asynchronous Telemetry Ingestion:** The architecture is designed to intercept text-transcribed log alerts from stadium IoT hardware (turnstiles, transit gates, climate sensors) and map them dynamically into an active state payload.
+* **GenAI Orchestration & Prompting:** Instead of standard keyword searching, the engine leverages structured system instructions within a optimized generative backend. It evaluates threat metrics, determines confidence values, and synthesizes operational response steps simultaneously.
+* **Instant Visual Mapping Telemetry:** Computes hazard levels to immediately trigger CSS keyframe animations and fill-state changes on a customized responsive SVG stadium layout, providing instant cognitive feedback to operators.
 
 ---
 
-## 🛠️ Assumptions Made
-1. **IoT Network Reliability:** Assumes stadium smart nodes support edge failover capabilities to buffer logs during network switch outages.
-2. **Spectator Adherence:** Assumes stadium digital screens are clearly visible to spectators, allowing immediate guidance during rerouting.
-3. **Transport Integration:** Assumes NJ Transit and local train services expose live telemetry endpoints via standard webhook protocols.
+## 📋 Core Assumptions Made
+* Assumes stadium venue infrastructure provides unified, real-time log outputs from digital turnstiles and local mass transit hubs.
+* Assumes on-ground venue staff and stadium volunteers have mobile micro-dashboards capable of receiving real-time markdown-based text instructions.
+* Assumes zero-trust boundaries at the client level, requiring full raw data text escaping before rendering logs in the mission control room feed.
+
+---
+
+## 🌟 Key Features & Architecture
+
+### 🛡️ 1. Technical Merit & Performance (Weight: 40%)
+* **Reactive Simulation State Engine:** Implements a localized, state-driven JavaScript engine allowing operators to simulate critical World Cup crises in real time (e.g., *Gate 4 Surge*, *West Metrolink Transit Blockade*).
+* **AI Telemetry & Async Processing:** Integrates professional skeleton loaders representing a 1.5s simulated API round-trip token processing delay to emulate real-world async network requests.
+* **Dynamic Visual Mapping:** Features a customized SVG stadium layout representing the North, South, East, and West Stands. The quadrants execute CSS-driven pulse animations and shift colors dynamically to reflect computed risk levels.
+
+### 🧠 2. Deep GenAI Integration & Prompt Engineering (Weight: 25%)
+* **Cognitive Action Network:** Uses structured telemetry mockups mirroring Gemini 1.5 Pro output capabilities to compute a real-time Danger Index, Risk Level, and overall Confidence Score.
+* **On-Ground Volunteer Directives:** Auto-generates three highly contextual, actionable steps for stadium stewards and volunteers during critical incidents.
+* **Multilingual Broadcast Engine:** Instantly localizes stadium-wide emergency announcements into English, Spanish, and French to eliminate communication barriers for international spectators.
+* **Integrated System Prompt:** Includes an interactive on-screen "System Prompt" viewer that showcases the exact prompt engineering parameters utilized to control the AI safety warden backend.
+
+### ♿ 3. Accessibility & Security Compliance (Weight: 10%)
+* **WCAG AA Color Contrast:** Implements a high-contrast dark mode slate theme (`bg-zinc-950`) specifically styled to minimize eye strain for command center operators working extended shifts.
+* **Semantic ARIA Integration:** Fully optimized for assistive technologies with screen-reader accessible landmarks (`role="log"` for the live event stream, `role="status"` for danger indexes).
+* **Input Sanitization:** Simulates a secure, zero-trust data pipeline by sanitizing all incoming live logs before rendering them on the DOM.
+
+---
+
+🚀 Run and Deploy Locally
+Prerequisites
+Node.js installed on your local machine.
+
+1. Clone the repository:
+git clone https://github.com/ayushsinha7/vanguard-2026.git
+2. Install dependencies:
+npm install
+3. Set the GEMINI_API_KEY in .env.local to your Google AI Studio API key.
+4. Run the development server: npm run dev
+
+## 🛠️ Tech Stack
+* **Frontend Framework:** React (Vite-ready)
+* **CSS Framework:** Tailwind CSS (Custom color tokens & telemetry animations)
+* **Icons:** Lucide React
+* **Hosting Pipeline:** Google Cloud Run (Deployed directly via Google AI Studio's cloud-publish feature)
+
+---
+
+## 📂 Project Structure
+```text
+├── src/
+│   ├── App.jsx             # Main Dashboard UI & Simulation State Logic
+│   ├── index.css           # Tailwind CSS directives & keyframe animations
+│   └── main.jsx            # React mounting and entry point
+├── package.json            # Scripts and project dependencies
+└── README.md               # Project documentation
