@@ -64,11 +64,35 @@ const DEFAULT_SYSTEM_PROMPT = `<gemini_instruction_context>
   </schema_declaration_json>
 </gemini_instruction_context>`;
 
+function ClockTicker({ isNormal }: { isNormal: boolean }) {
+  const [time, setTime] = useState<Date>(new Date());
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTime(new Date());
+    }, 1000);
+    return () => clearInterval(timer);
+  }, []);
+
+  const formatTime = (date: Date) => {
+    const pad = (n: number) => n.toString().padStart(2, '0');
+    return `${pad(date.getUTCHours())}:${pad(date.getUTCMinutes())}:${pad(date.getUTCSeconds())} UTC`;
+  };
+
+  return (
+    <span 
+      id="master-time-ticker" 
+      className={`text-base font-mono font-bold tracking-wider tabular-nums leading-none ${isNormal ? 'text-emerald-400' : 'text-rose-400'}`}
+    >
+      {formatTime(time)}
+    </span>
+  );
+}
+
 export default function App() {
   const [activeCrisis, setActiveCrisis] = useState<Crisis>(crisesList[0]);
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
   const [systemPrompt, setSystemPrompt] = useState<string>(DEFAULT_SYSTEM_PROMPT);
-  const [time, setTime] = useState<Date>(new Date());
   const [logs, setLogs] = useState<IncidentLogEntry[]>([]);
   const [testSuitePassed, setTestSuitePassed] = useState<boolean | null>(null);
 
@@ -88,19 +112,6 @@ export default function App() {
       console.error("Critical test runner failure:", err);
     }
   }, []);
-
-  // Update clock every second
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setTime(new Date());
-    }, 1000);
-    return () => clearInterval(timer);
-  }, []);
-
-  const formatTime = (date: Date) => {
-    const pad = (n: number) => n.toString().padStart(2, '0');
-    return `${pad(date.getUTCHours())}:${pad(date.getUTCMinutes())}:${pad(date.getUTCSeconds())} UTC`;
-  };
 
   const appendLogs = useCallback((messages: string[], type: 'info' | 'warn' | 'error' | 'success' = 'info') => {
     const timestampStr = new Date().toTimeString().split(' ')[0];
@@ -246,9 +257,7 @@ export default function App() {
           {/* Time tracker */}
           <div className="text-right">
             <span className="text-[9px] uppercase tracking-wider text-zinc-500 block leading-none mb-1">TACTICAL TIME</span>
-            <span id="master-time-ticker" className={`text-base font-mono font-bold tracking-wider tabular-nums leading-none ${isNormal ? 'text-emerald-400' : 'text-rose-400'}`}>
-              {formatTime(time)}
-            </span>
+            <ClockTicker isNormal={isNormal} />
           </div>
         </div>
       </header>

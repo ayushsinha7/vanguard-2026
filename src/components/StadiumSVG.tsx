@@ -13,35 +13,48 @@ interface SectorStats {
   load: string;
 }
 
+const SECTOR_GATE_MAPPING: Record<string, string> = {
+  North: 'N1 - N6',
+  South: 'S1 - S6',
+  East: 'E1 - E8',
+  West: 'W1 - W6'
+};
+
+const SECTOR_BASE_OCCUPANCY: Record<string, string> = {
+  North: '94%',
+  South: '91%',
+  East: '96%',
+  West: '89%'
+};
+
 function StadiumSVGComponent({ activeZone, activeSeverity }: StadiumSVGProps) {
   const [hoveredSector, setHoveredSector] = useState<StadiumZone>('None');
 
-  const getSectorStats = (zone: StadiumZone): SectorStats => {
-    switch (zone) {
-      case 'North':
-        return { occupancy: '94%', gates: 'N1 - N6', temp: activeSeverity === 'Extreme' ? '65°F' : '72°F', load: 'Nominal' };
-      case 'South':
-        return { occupancy: '91%', gates: 'S1 - S6', temp: activeSeverity === 'Extreme' ? '65°F' : '72°F', load: 'Nominal' };
-      case 'East':
-        return { 
-          occupancy: activeZone === 'East' ? '128% [OVERLOAD]' : '96%', 
-          gates: 'E1 - E8', 
-          temp: '72°F', 
-          load: activeZone === 'East' ? 'CRITICAL SURGE' : 'Optimal' 
-        };
-      case 'West':
-        return { 
-          occupancy: activeZone === 'West' ? '114% [CONGESTED]' : '89%', 
-          gates: 'W1 - W6', 
-          temp: '71°F', 
-          load: activeZone === 'West' ? 'GRIDLOCK RISK' : 'Optimal' 
-        };
-      default:
-        return { occupancy: '--', gates: '--', temp: '--', load: '--' };
+  const getSectorStats = React.useCallback((zone: StadiumZone): SectorStats => {
+    if (zone === 'None') return { occupancy: '--', gates: '--', temp: '--', load: '--' };
+    
+    const baseOcc = SECTOR_BASE_OCCUPANCY[zone] || '--';
+    const gates = SECTOR_GATE_MAPPING[zone] || '--';
+    const isExtreme = activeSeverity === 'Extreme';
+    const temp = isExtreme ? '65°F' : '72°F';
+    
+    let occupancy = baseOcc;
+    let load = 'Optimal';
+    
+    if (zone === 'East') {
+      occupancy = activeZone === 'East' ? '128% [OVERLOAD]' : '96%';
+      load = activeZone === 'East' ? 'CRITICAL SURGE' : 'Optimal';
+    } else if (zone === 'West') {
+      occupancy = activeZone === 'West' ? '114% [CONGESTED]' : '89%';
+      load = activeZone === 'West' ? 'GRIDLOCK RISK' : 'Optimal';
+    } else if (zone === 'North' || zone === 'South') {
+      load = 'Nominal';
     }
-  };
+    
+    return { occupancy, gates, temp, load };
+  }, [activeZone, activeSeverity]);
 
-  const getStandClass = (zone: StadiumZone) => {
+  const getStandClass = React.useCallback((zone: StadiumZone) => {
     const isTarget = activeZone === zone || (activeSeverity === 'Extreme' && (zone === 'North' || zone === 'South' || zone === 'East' || zone === 'West'));
     
     if (!isTarget) {
@@ -58,7 +71,7 @@ function StadiumSVGComponent({ activeZone, activeSeverity }: StadiumSVGProps) {
       default:
         return 'animate-pulse-green stroke-emerald-500 fill-emerald-950/20 cursor-pointer transition-all duration-300';
     }
-  };
+  }, [activeZone, activeSeverity]);
 
   const currentStats = hoveredSector !== 'None' ? getSectorStats(hoveredSector) : null;
 
