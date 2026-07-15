@@ -1,0 +1,6 @@
+{
+  "name": "FIFA World Cup 2026 Smart Stadium Mission Control",
+  "description": "High-density real-time telemetry dashboard and GenAI crisis simulation engine for FIFA World Cup 2026 Smart Stadiums.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

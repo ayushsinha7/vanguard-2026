@@ -1,0 +1,74 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  --font-display: "Space Grotesk", sans-serif;
+
+  /* Custom Glow/State Colors */
+  --color-brand-emerald: #10b981;
+  --color-brand-amber: #f59e0b;
+  --color-brand-rose: #f43f5e;
+  
+  /* System animations for state-glows */
+  @keyframes scanline {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(100%); }
+  }
+  @keyframes radar-pulse {
+    0% { transform: scale(0.95); opacity: 0.5; }
+    50% { transform: scale(1.1); opacity: 0.2; }
+    100% { transform: scale(0.95); opacity: 0.5; }
+  }
+  @keyframes threat-pulse-red {
+    0%, 100% { fill: rgba(244, 63, 94, 0.25); stroke: rgba(244, 63, 94, 0.95); filter: drop-shadow(0 0 4px rgba(244, 63, 94, 0.6)); }
+    50% { fill: rgba(244, 63, 94, 0.45); stroke: rgba(244, 63, 94, 1); filter: drop-shadow(0 0 16px rgba(244, 63, 94, 0.95)); }
+  }
+  @keyframes threat-pulse-amber {
+    0%, 100% { fill: rgba(245, 158, 11, 0.25); stroke: rgba(245, 158, 11, 0.85); filter: drop-shadow(0 0 4px rgba(245, 158, 11, 0.5)); }
+    50% { fill: rgba(245, 158, 11, 0.45); stroke: rgba(245, 158, 11, 1); filter: drop-shadow(0 0 12px rgba(245, 158, 11, 0.85)); }
+  }
+  @keyframes threat-pulse-green {
+    0%, 100% { fill: rgba(16, 185, 129, 0.15); stroke: rgba(16, 185, 129, 0.75); filter: drop-shadow(0 0 2px rgba(16, 185, 129, 0.3)); }
+    50% { fill: rgba(16, 185, 129, 0.25); stroke: rgba(16, 185, 129, 0.95); filter: drop-shadow(0 0 8px rgba(16, 185, 129, 0.6)); }
+  }
+
+  --animate-scanline: scanline 6s linear infinite;
+  --animate-radar: radar-pulse 3s ease-in-out infinite;
+  --animate-pulse-red: threat-pulse-red 1.5s ease-in-out infinite;
+  --animate-pulse-amber: threat-pulse-amber 2s ease-in-out infinite;
+  --animate-pulse-green: threat-pulse-green 4s ease-in-out infinite;
+}
+
+/* Custom overlay scan lines for Mission Control style */
+.bg-grid-pattern {
+  background-size: 30px 30px;
+  background-image: linear-gradient(to right, rgba(63, 63, 70, 0.08) 1px, transparent 1px),
+                    linear-gradient(to bottom, rgba(63, 63, 70, 0.08) 1px, transparent 1px);
+}
+
+.glow-panel-red {
+  box-shadow: inset 0 0 15px rgba(244, 63, 94, 0.08), 0 0 15px rgba(244, 63, 94, 0.05);
+  border-color: rgba(244, 63, 94, 0.25);
+}
+
+.glow-panel-amber {
+  box-shadow: inset 0 0 15px rgba(245, 158, 11, 0.08), 0 0 15px rgba(245, 158, 11, 0.05);
+  border-color: rgba(245, 158, 11, 0.25);
+}
+
+.glow-panel-green {
+  box-shadow: inset 0 0 15px rgba(16, 185, 129, 0.05), 0 0 10px rgba(16, 185, 129, 0.02);
+  border-color: rgba(16, 185, 129, 0.15);
+}
+
+/* Hide scrollbars for mission control vibe, but keep scroll functionality */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
