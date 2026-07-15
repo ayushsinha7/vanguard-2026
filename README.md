@@ -5,7 +5,7 @@
 
 ---
 
-[![Live Site](https://fifa-world-cup-2026-smart-stadium-mission-control-680335411376.asia-southeast1.run.app)
+Live Link : https://fifa-world-cup-2026-smart-stadium-mission-control-680335411376.asia-southeast1.run.app
 
 ## 🌟 Key Features & Architecture
 
