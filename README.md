@@ -3,6 +3,7 @@
 Vanguard 2026 is an enterprise-grade, real-time GenAI-enabled Incident Command and Dynamic Crowd Control dashboard. Specifically engineered to meet the massive operational demands of the FIFA World Cup 2026, it transforms raw, chaotic on-ground telemetry into real-time decision support, automated volunteer dispatch directives, and instant multilingual spectator broadcasts.
 
 **Live Link:** https://fifa-world-cup-2026-smart-stadium-mission-control-680335411376.asia-southeast1.run.app
+GitHub Repo : https://github.com/ayushsinha7/vanguard-2026/blob/main/README.md
 
 ---
 
