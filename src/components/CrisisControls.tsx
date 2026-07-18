@@ -148,7 +148,7 @@ export default function CrisisControls({
 
               return (
                 <button
-                  key={crisis.id}
+                  key={`crisis_det_${crisis.id}`}
                   onClick={() => !isProcessing && onSelectCrisis(crisis.id)}
                   disabled={isProcessing}
                   id={`trigger-${crisis.id}`}

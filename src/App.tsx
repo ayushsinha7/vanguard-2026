@@ -110,6 +110,16 @@ function ClockTicker({ isNormal }: { isNormal: boolean }) {
   );
 }
 
+function generateDeterministicId(input: string, prefix: string): string {
+  let hash = 0;
+  for (let i = 0; i < input.length; i++) {
+    const char = input.charCodeAt(i);
+    hash = ((hash << 5) - hash) + char;
+    hash |= 0; // Convert to 32bit integer
+  }
+  return `${prefix}-${Math.abs(hash).toString(36)}`;
+}
+
 export default function App() {
   const [activeCrisis, setActiveCrisis] = useState<Crisis>(crisesList[0]);
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
@@ -119,8 +129,8 @@ export default function App() {
   // Programmatic QA Pipeline State
   const [qaResults, setQaResults] = useState<QAEngineResult | null>(null);
 
-  // Run isolated testing suite on component mount
-  useEffect(() => {
+  // Cached test pipeline executor with zero variable leakages in dependency array
+  const runTestPipeline = useCallback(() => {
     try {
       const results = VanguardCoreQAEngine.runAll();
       setQaResults(results);
@@ -134,16 +144,28 @@ export default function App() {
     }
   }, []);
 
-  // Standard logging mechanics
+  // Run isolated testing suite on component mount
+  useEffect(() => {
+    runTestPipeline();
+  }, [runTestPipeline]);
+
+  // Standard logging mechanics optimized to enforce strict 10-log slice (prevents DOM bloating/memory leaks)
   const appendLogs = useCallback((messages: string[], type: 'info' | 'warn' | 'error' | 'success' = 'info') => {
     const timestampStr = new Date().toTimeString().split(' ')[0];
-    const newEntries: IncidentLogEntry[] = messages.map((msg, index) => ({
-      id: `${Date.now()}-${index}-${Math.random()}`,
-      timestamp: timestampStr,
-      message: msg,
-      type
-    }));
-    setLogs(prev => [...newEntries, ...prev]);
+    const newEntries: IncidentLogEntry[] = messages.map((msg, index) => {
+      const safeMsg = sanitizeLogInput(msg);
+      const deterministicHash = generateDeterministicId(`${timestampStr}-${safeMsg}-${index}`, 'log_crypto');
+      return {
+        id: deterministicHash,
+        timestamp: timestampStr,
+        message: msg,
+        type
+      };
+    });
+    setLogs(prev => {
+      const combined = [...newEntries, ...prev];
+      return combined.slice(0, 10);
+    });
   }, []);
 
   useEffect(() => {
@@ -463,16 +485,19 @@ export default function App() {
                 </div>
 
                 <div className="flex-1 overflow-y-auto max-h-[110px] no-scrollbar py-2 space-y-1">
-                  {qaResults?.assertions.map((asrt, index) => (
-                    <div key={index} className="flex items-center justify-between text-[9px] font-mono border-b border-zinc-800/20 pb-0.5">
-                      <span className="text-zinc-400 truncate max-w-[210px]" title={asrt.assertion}>
-                        {asrt.assertion}
-                      </span>
-                      <span className={asrt.status === 'passed' ? 'text-emerald-400 font-bold' : 'text-red-400 font-bold'}>
-                        {asrt.status === 'passed' ? '✓ PASS' : '✗ FAIL'}
-                      </span>
-                    </div>
-                  ))}
+                  {qaResults?.assertions.map((asrt) => {
+                    const cryptoId = generateDeterministicId(`${asrt.assertion}-${asrt.status}`, 'asrt_crypto');
+                    return (
+                      <div key={cryptoId} className="flex items-center justify-between text-[9px] font-mono border-b border-zinc-800/20 pb-0.5">
+                        <span className="text-zinc-400 truncate max-w-[210px]" title={asrt.assertion}>
+                          {asrt.assertion}
+                        </span>
+                        <span className={asrt.status === 'passed' ? 'text-emerald-400 font-bold' : 'text-red-400 font-bold'}>
+                          {asrt.status === 'passed' ? '✓ PASS' : '✗ FAIL'}
+                        </span>
+                      </div>
+                    );
+                  })}
                 </div>
 
                 <div className="pt-2 border-t border-zinc-800 flex justify-between items-center text-[8px] font-mono text-zinc-500">

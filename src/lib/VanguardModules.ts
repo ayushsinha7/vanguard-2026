@@ -95,8 +95,12 @@ export class SmartNavigationModule {
       let accessibilityMarshalDeploys = false;
       let status = 'Standard Navigation Route Active';
 
+      // Convert arrays to O(1) lookup Sets
+      const crowdedSet = new Set(constraints.crowdedSectors);
+      const highSensorySet = new Set(constraints.highSensorySectors);
+
       // Check for sensory overload risk or accessibility requirements
-      if (constraints.needsAccessibility || constraints.highSensorySectors.includes(startSector)) {
+      if (constraints.needsAccessibility || highSensorySet.has(startSector)) {
         accessibilityMarshalDeploys = true;
         avoidedSectors.push(startSector);
         recommendedPath = 'S1B (Low-Acoustic Corridor)';
@@ -104,10 +108,10 @@ export class SmartNavigationModule {
         status = 'Accessibility Guidance Active - Dynamic Quiet corridor route selected';
         
         // Also register crowded sectors as avoided but keep high accessibility priority path
-        if (constraints.crowdedSectors.includes('East')) {
+        if (crowdedSet.has('East')) {
           avoidedSectors.push('East');
         }
-      } else if (constraints.crowdedSectors.includes('East')) {
+      } else if (crowdedSet.has('East')) {
         // Check for physical crowd blocks
         avoidedSectors.push('East');
         recommendedPath = 'East-North Concourse Bypass Connector';

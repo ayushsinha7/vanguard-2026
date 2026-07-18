@@ -13,19 +13,19 @@ interface SectorStats {
   load: string;
 }
 
-const SECTOR_GATE_MAPPING: Record<string, string> = {
+const SECTOR_GATE_MAPPING: Record<string, string> = Object.freeze({
   North: 'N1 - N6',
   South: 'S1 - S6',
   East: 'E1 - E8',
   West: 'W1 - W6'
-};
+});
 
-const SECTOR_BASE_OCCUPANCY: Record<string, string> = {
+const SECTOR_BASE_OCCUPANCY: Record<string, string> = Object.freeze({
   North: '94%',
   South: '91%',
   East: '96%',
   West: '89%'
-};
+});
 
 function StadiumSVGComponent({ activeZone, activeSeverity }: StadiumSVGProps) {
   const [hoveredSector, setHoveredSector] = useState<StadiumZone>('None');
@@ -245,4 +245,6 @@ function StadiumSVGComponent({ activeZone, activeSeverity }: StadiumSVGProps) {
   );
 }
 
-export default memo(StadiumSVGComponent);
+export default memo(StadiumSVGComponent, (prevProps, nextProps) => {
+  return prevProps.activeZone === nextProps.activeZone && prevProps.activeSeverity === nextProps.activeSeverity;
+});

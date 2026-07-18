@@ -188,7 +188,7 @@ export default function DecisionEngine({
                     const badgeBg = isNormal ? 'bg-zinc-800 text-zinc-400 border-zinc-700' : 'bg-rose-950/40 text-rose-400 border-rose-500/30';
 
                     return (
-                      <li key={index} className="flex items-start gap-3">
+                      <li key={`directive_det_${index}_${directive.substring(0, 10).replace(/[^a-zA-Z0-9]/g, '')}`} className="flex items-start gap-3">
                         <span className={`flex-shrink-0 w-4 h-4 rounded text-[9px] font-bold font-mono flex items-center justify-center border ${badgeBg}`}>
                           0{index + 1}
                         </span>
