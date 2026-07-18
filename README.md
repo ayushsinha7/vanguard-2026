@@ -4,7 +4,7 @@ Vanguard 2026 is an enterprise-grade, real-time GenAI-enabled Incident Command a
 
 **Live Link:** https://fifa-world-cup-2026-smart-stadium-mission-control.ai.studio
 
-**GitHub Repo:** https://github.com/ayushsinha7/vanguard-2026/blob/main/README.md
+**GitHub Repo:** https://github.com/ayushsinha7/vanguard-2026
 
 ---
 
